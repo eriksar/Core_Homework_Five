@@ -4,9 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
- * Класс для представления и управления игровым полем.
- */
 public class GameBoard {
     private int[] boardState;
 
@@ -14,11 +11,7 @@ public class GameBoard {
         this.boardState = boardState;
     }
 
-    /**
-     * Кодирует состояние игрового поля в одно целое число.
-     *
-     * @вернуть закодированное состояние игрового поля
-     */
+
     public int encodeBoard() {
         int encodedBoard = 0;
         for (int i = 0; i < boardState.length; i++) {
@@ -28,11 +21,7 @@ public class GameBoard {
         return encodedBoard;
     }
 
-    /**
-     * Декодирует состояние игрового поля из одного целого числа.
-     *
-     * @param encodedBoard — закодированное состояние игрового поля.
-     */
+
     public void decodeBoard(int encodedBoard) {
         for (int i = boardState.length - 1; i >= 0; i--) {
             int cellState = encodedBoard & 3;
@@ -41,24 +30,12 @@ public class GameBoard {
         }
     }
 
-    /**
-     * Записывает состояние игрового поля в файл.
-     *
-     * @param fileName имя файла для записи
-     * @throws IOException, если возникает ошибка ввода/вывода
-     */
     public void writeToFile(String fileName) throws IOException {
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(fileName))) {
             dos.writeInt(encodeBoard());
         }
     }
 
-    /**
-     * Читает состояние игрового поля из файла.
-     *
-     * @param fileName имя файла для чтения
-     * @throws IOException, если возникает ошибка ввода/вывода
-     */
     public void readFromFile(String fileName) throws IOException {
         try (DataInputStream dis = new DataInputStream(new FileInputStream(fileName))) {
             int readBoard = dis.readInt();
@@ -66,9 +43,6 @@ public class GameBoard {
         }
     }
 
-    /**
-     * Выводит состояние игрового поля на консоль.
-     */
     public void printBoard() {
         for (int i = 0; i < boardState.length; i++) {
             char cellSymbol;
@@ -86,7 +60,6 @@ public class GameBoard {
                     cellSymbol = '?'; // неизвестное состояние ячейки
                     break;
             }
-            // Печатает в строчке по три символа
             System.out.print(cellSymbol + " ");
             if ((i + 1) % 3 == 0) {
                 System.out.println();
